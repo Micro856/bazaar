@@ -1,4 +1,4 @@
-/* bz-window.c
+/* bz-appstream-parser.c
  *
  * Copyright 2025 Adam Masciola, 2026 Alexander Vanhee
  *
