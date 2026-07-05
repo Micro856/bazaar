@@ -984,7 +984,7 @@ bz_flatpak_repo_new_from_url (const char   *url,
   g_autoptr (GOutputStream) output = NULL;
   g_autoptr (GBytes) bytes         = NULL;
   g_autoptr (GKeyFile) key_file    = NULL;
-  BzFlatpakRepo *repo              = NULL;
+  g_autoptr (BzFlatpakRepo) repo   = NULL;
   g_autoptr (GError) local_error   = NULL;
   gboolean         result          = FALSE;
   g_autofree char *name            = NULL;
