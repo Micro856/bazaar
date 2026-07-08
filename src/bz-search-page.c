@@ -666,11 +666,14 @@ gboolean
 bz_search_page_ensure_active (BzSearchPage *self,
                               const char   *initial)
 {
+  gboolean result = FALSE;
+
   g_return_val_if_fail (BZ_IS_SEARCH_PAGE (self), FALSE);
 
+  result = gtk_widget_grab_focus (GTK_WIDGET (self));
   bz_search_page_set_text (self, initial);
 
-  return gtk_widget_grab_focus (GTK_WIDGET (self));
+  return result;
 }
 
 static void
