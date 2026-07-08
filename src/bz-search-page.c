@@ -773,9 +773,7 @@ search_query_then (DexFuture *future,
       gtk_widget_activate_action (GTK_WIDGET (self->grid_view), "list.scroll-to-item", "u", 0);
     }
   else
-    {
-      page_name = (search_text && *search_text) ? "no-results" : "empty";
-    }
+    page_name = (search_text != NULL && *search_text) ? "no-results" : "empty";
 
   if (search_text && *search_text)
     {
