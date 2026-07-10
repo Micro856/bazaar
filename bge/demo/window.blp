@@ -23,6 +23,21 @@ Box root {
     }
 
     StackPage {
+      name: "carousel";
+      title: "Carousel";
+
+      child: ScrolledWindow {
+        hscrollbar-policy: never;
+
+        child: Box carousel_box {
+          valign: center;
+          orientation: vertical;
+          spacing: 4;
+        };
+      };
+    }
+
+    StackPage {
       name: "wdgt";
       title: "Wdgt";
 
