@@ -212,7 +212,7 @@ show_all_cb (BzAppsPage *self,
     return;
 
   all_title = g_strdup_printf (_("All \"%s\""), self->title);
-  all_page  = bz_all_apps_page_new (all_title, g_object_ref (self->all_applications));
+  all_page  = bz_all_apps_page_new (all_title, self->all_applications);
   if (all_page == NULL)
     return;
 
