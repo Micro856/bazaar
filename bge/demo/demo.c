@@ -71,7 +71,7 @@ on_activate (GtkApplication *app)
   gconstpointer markdown_buffer         = NULL;
 
   window = gtk_application_window_new (app);
-  gtk_window_set_default_size (GTK_WINDOW (window), 1000, 500);
+  gtk_window_set_default_size (GTK_WINDOW (window), 1000, 800);
 
   scope = gtk_builder_cscope_new ();
 
