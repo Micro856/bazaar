@@ -33,12 +33,10 @@ BZ_DEFINE_DATA (
     main,
     Main,
     {
-      GMainLoop  *loop;
-      GIOChannel *stdout_channel;
-      int         rv;
+      GMainLoop *loop;
+      int        rv;
     },
-    BZ_RELEASE_DATA (loop, g_main_loop_unref);
-    BZ_RELEASE_DATA (stdout_channel, g_io_channel_unref));
+    BZ_RELEASE_DATA (loop, g_main_loop_unref));
 
 static DexFuture *
 run (MainData *data);
@@ -47,21 +45,15 @@ int
 run_refresh_worker (int   argc,
                     char *argv[])
 {
-  g_autoptr (GIOChannel) stdout_channel = NULL;
-  g_autoptr (GMainLoop) main_loop       = NULL;
-  g_autoptr (MainData) data             = NULL;
-  g_autoptr (DexFuture) future          = NULL;
-
-  stdout_channel = g_io_channel_unix_new (STDOUT_FILENO);
-  g_assert (g_io_channel_set_encoding (stdout_channel, NULL, NULL));
-  g_io_channel_set_buffered (stdout_channel, FALSE);
+  g_autoptr (GMainLoop) main_loop = NULL;
+  g_autoptr (MainData) data       = NULL;
+  g_autoptr (DexFuture) future    = NULL;
 
   main_loop = g_main_loop_new (NULL, FALSE);
 
-  data                 = main_data_new ();
-  data->loop           = g_main_loop_ref (main_loop);
-  data->stdout_channel = g_io_channel_ref (stdout_channel);
-  data->rv             = EXIT_SUCCESS;
+  data       = main_data_new ();
+  data->loop = g_main_loop_ref (main_loop);
+  data->rv   = EXIT_SUCCESS;
 
   future = dex_scheduler_spawn (
       dex_scheduler_get_default (),
