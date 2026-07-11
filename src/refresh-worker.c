@@ -23,9 +23,11 @@
 #include "bz-backend-notification.h"
 #include "bz-backend.h"
 #include "bz-entry-cache-manager.h"
-#include "env.h"
 #include "bz-flatpak-instance.h"
+#include "env.h"
 #include "util.h"
+
+#include "refresh-worker.h"
 
 BZ_DEFINE_DATA (
     main,
@@ -42,16 +44,13 @@ static DexFuture *
 run (MainData *data);
 
 int
-main (int   argc,
-      char *argv[])
+run_refresh_worker (int   argc,
+                    char *argv[])
 {
   g_autoptr (GIOChannel) stdout_channel = NULL;
   g_autoptr (GMainLoop) main_loop       = NULL;
   g_autoptr (MainData) data             = NULL;
   g_autoptr (DexFuture) future          = NULL;
-
-  g_log_writer_default_set_use_stderr (TRUE);
-  dex_init ();
 
   stdout_channel = g_io_channel_unix_new (STDOUT_FILENO);
   g_assert (g_io_channel_set_encoding (stdout_channel, NULL, NULL));

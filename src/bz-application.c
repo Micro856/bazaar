@@ -41,8 +41,6 @@
 #include "bz-download-worker.h"
 #include "bz-entry-cache-manager.h"
 #include "bz-entry-group.h"
-#include "env.h"
-#include "error.h"
 #include "bz-favorites-page.h"
 #include "bz-flathub-state.h"
 #include "bz-flatpak-bundle-result.h"
@@ -52,7 +50,6 @@
 #include "bz-hash-table-object.h"
 #include "bz-inspector.h"
 #include "bz-internal-config.h"
-#include "io.h"
 #include "bz-login-page.h"
 #include "bz-malcontent-service.h"
 #include "bz-metainfo-preview.h"
@@ -65,10 +62,13 @@
 #include "bz-serializable.h"
 #include "bz-state-info.h"
 #include "bz-transaction-manager.h"
-#include "util.h"
 #include "bz-window.h"
 #include "bz-yaml-parser.h"
+#include "env.h"
+#include "error.h"
+#include "io.h"
 #include "progress-bar-designs/common.h"
+#include "util.h"
 
 struct _BzApplication
 {
@@ -4043,7 +4043,8 @@ make_sync_future (BzApplication *self)
   refresh_worker = g_subprocess_new (
       G_SUBPROCESS_FLAGS_NONE,
       &local_error,
-      REFRESH_WORKER_BIN_NAME,
+      BAZAAR_BIN_NAME,
+      REFRESH_WORKER_CLI_OPTION,
       NULL);
   if (refresh_worker == NULL)
     g_critical ("FATAL!!! The refresh worker could not be spawned: %s",
