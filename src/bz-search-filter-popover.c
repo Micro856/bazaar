@@ -333,17 +333,17 @@ apply_filter_button (BzSearchFilterPopover *self,
       if (*map[i].field != value)
         {
           *map[i].field = value;
-
-          if (value)
-            gtk_widget_add_css_class (*map[i].button, "accent");
-          else
-            gtk_widget_remove_css_class (*map[i].button, "accent");
-
-          if (from_state)
-            gtk_widget_set_sensitive (*map[i].button, !value);
-
           g_object_notify_by_pspec (G_OBJECT (self), props[prop]);
         }
+
+      if (value)
+        gtk_widget_add_css_class (*map[i].button, "accent");
+      else
+        gtk_widget_remove_css_class (*map[i].button, "accent");
+
+      if (from_state)
+        gtk_widget_set_sensitive (*map[i].button, !value);
+
       return;
     }
 }
